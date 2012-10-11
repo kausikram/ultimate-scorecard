@@ -1,11 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
-        <h3>Scores</h3>
+
+        <h3>Control</h3>
+        {% if control %}
+        <a class="btn" href="/create_team/">Create Team</a>
+        <a class="btn" href="/create_match/">Create Match</a>
+        {% endif %}
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Match Number</th><th>Team 1</th><th>Team 2</th><th>Score</th><th>Edit</th><th>Spirit</th>
+                <th>Match Number</th><th>Team 1</th><th>Team 2</th><th>Score</th>{% if control %}<th>Edit</th><th>Spirit</th>{% endif %}
             </tr>
         </thead>
         <tbody>
@@ -15,11 +20,13 @@
                     <td>{{ m.get_teams()[0].team_name }}</td>
                     <td>{{ m.get_teams()[1].team_name }}</td>
                     <td>{{ m.get_score_string() }}</td>
+                    {% if control %}
                     <td><a href="/edit_score/{{ m.id }}/">Edit Score</a></td>
                     <td>
                         <a href="/add_spirit_score/{{ m.get_matchteams()[0].id }}/">Assess {{ m.get_matchteams()[0].team.team_name}}</a>
                         <a href="/add_spirit_score/{{ m.get_matchteams()[1].id }}/">Assess {{ m.get_matchteams()[1].team.team_name}}</a>
                     </td>
+                    {% endif %}
                 </tr>
             {% endfor %}
         </tbody>

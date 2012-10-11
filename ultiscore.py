@@ -18,13 +18,14 @@ def after_request(ex):
 def show_scores():
     """ list all matches here"""
     matches = Match.select().where(True)
-    return render_template("list_matches.html",matches=matches)
+    return render_template("list_matches.html",matches=matches, control=False)
 
-@app.route('/spirit/')
-def show_scores():
+@app.route('/control/')
+def show_control():
     """ list all matches here"""
     matches = Match.select().where(True)
-    return render_template("list_matches.html",matches=matches)
+    return render_template("list_matches.html",matches=matches, control=True)
+
 
 @app.route('/teams/')
 def list_teams():
