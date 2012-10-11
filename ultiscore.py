@@ -40,7 +40,7 @@ def create_team():
         return render_template("new_team_form.html")
     if request.method == "POST":
         Team.create(team_name = request.form['team_name'])
-        return redirect("/teams/")
+        return redirect("/control/")
 
 @app.route('/create_match/', methods=['POST', 'GET'])
 def create_match():
@@ -53,7 +53,7 @@ def create_match():
         t1 = Team.get(Team.id == request.form['team_1_id'])
         t2 = Team.get(Team.id == request.form['team_2_id'])
         m = Match.create_match(t1,t2)
-        return redirect("/")
+        return redirect("/control/")
 
 
 @app.route('/edit_score/<int:match_id>/', methods=['POST', 'GET'])
@@ -85,4 +85,4 @@ def enter_spirit_score_for_team(mt_id):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0')
