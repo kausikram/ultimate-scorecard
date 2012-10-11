@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <form action="." method="post">
+        <label>Team 1</label>
+        <select name="team_1_id">
+            {% for t in teams %}
+            <option value={{ t.id }}>{{ t.team_name }}</option>
+            {% endfor %}
+        </select>
+        <label>Team 2</label>
+        <select name="team_2_id">
+            {% for t in teams %}
+            <option value={{ t.id }}>{{ t.team_name }}</option>
+            {% endfor %}
+        </select>
+        <br />
+        <input type="submit" value="save" class="btn">
+    </form>
+{% endblock %}

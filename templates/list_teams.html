@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+        <h3>Spirit Scores</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Team</th>
+                <th>Rules Knowledge and Use</th>
+                <th>Fouls and Body Contact</th>
+                <th> Fair-Mindedness</th>
+                <th> Positive Attitude and Self-Control</th>
+                <th>Our Spirit compared to theirs</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for t in teams %}
+                <tr>
+                    <td>{{ t.team_name }}</td>
+                    <td>{{ t.get_average_spirit_scores()["rules"] }}</td>
+                    <td>{{ t.get_average_spirit_scores()["fouls"] }}</td>
+                    <td>{{ t.get_average_spirit_scores()["fair"] }}</td>
+                    <td>{{ t.get_average_spirit_scores()["positive"] }}</td>
+                    <td>{{ t.get_average_spirit_scores()["our_spirit"] }}</td>
+                    <td>{{ t.get_average_spirit_scores()["total"] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+{% endblock %}

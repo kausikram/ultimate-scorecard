@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <form action="." method="post">
+        {% for mt in mts %}
+        <label>Score of {{ mt.team.team_name }}</label>
+        <input type="text" name="{{ mt.id }}_score" value="{{ mt.score }}" name=>
+        {% endfor %}
+        <br />
+        <input type="submit" value="save" class="btn">
+    </form>
+{% endblock %}

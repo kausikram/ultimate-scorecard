@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+        <h3>Scores</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Match Number</th><th>Team 1</th><th>Team 2</th><th>Score</th><th>Edit</th><th>Spirit</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for m in matches %}
+                <tr>
+                    <td>{{ m.id }}</td>
+                    <td>{{ m.get_teams()[0].team_name }}</td>
+                    <td>{{ m.get_teams()[1].team_name }}</td>
+                    <td>{{ m.get_score_string() }}</td>
+                    <td><a href="/edit_score/{{ m.id }}/">Edit Score</a></td>
+                    <td>
+                        <a href="/add_spirit_score/{{ m.get_matchteams()[0].id }}/">Assess {{ m.get_matchteams()[0].team.team_name}}</a>
+                        <a href="/add_spirit_score/{{ m.get_matchteams()[1].id }}/">Assess {{ m.get_matchteams()[1].team.team_name}}</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+{% endblock %}

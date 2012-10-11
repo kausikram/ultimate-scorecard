@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="alert"> This form is to assess the performance of <strong>{{mt.team.team_name}}</strong> and should be filled by <strong>{{ mt.get_opponent().team_name }}</strong></div>
+    <form action="." method="post">
+
+        <h4>Rules Knowledge and Use</h4>
+        <span class="help-bloc">
+        For example: They did not make unjustified calls. They did not purposefully misinterpret the rules. They kept to time limits. They were willing to teach and/or learn the rules.
+        </span><br />
+        <label class="radio inline">
+            <input type="radio" name="rules" value=0 checked>
+            Poor
+        </label>
+        <label class="radio inline">
+            <input type="radio" name="rules" value=1>
+            Not So Good
+        </label>
+        <label class="radio inline">
+            <input type="radio" name="rules" value=2>
+            Good
+        </label>
+        <label class="radio inline">
+            <input type="radio" name="rules" value=3>
+            Very Good
+        </label>
+        <label class="radio inline">
+            <input type="radio" name="rules" value=4>
+            Excellent
+        </label>
+
+        <h4>Fouls and Body Contact</h4>
+        <span class="help-bloc">
+        For example: They avoided fouling, contact, and dangerous plays.
+        </span><br />
+        <label class="radio inline">
+            <input type="radio" name="fouls" value=0 checked>
+            Poor
+        </label>
+        <label class="radio inline">
+            <input type="radio" name="fouls" value=1>
+            Not So Good
+        </label>
+        <label class="radio inline">
+            <input type="radio" name="fouls" value=2>
+            Good
+        </label>
+        <label class="radio inline">
+            <input type="radio" name="fouls" value=3>
+            Very Good
+        </label>
+        <label class="radio inline">
+            <input type="radio" name="fouls" value=4>
+            Excellent
+        </label>
+
+        <h4>Fair-Mindedness</h4>
+        <span class="help-bloc">
+        For example: They apologized for their own fouls. They informed teammates when they made wrong or unnecessary calls. They were willing to admit that we were right and retracted their call.
+        </span><br />
+        <label class="radio inline">
+            <input type="radio" name="fair" value=0 checked>
+            Poor
+        </label>
+        <label class="radio inline">
+            <input type="radio" name="fair" value=1>
+            Not So Good
+        </label>
+        <label class="radio inline">
+            <input type="radio" name="fair" value=2>
+            Good
+        </label>
+        <label class="radio inline">
+            <input type="radio" name="fair" value=3>
+            Very Good
+        </label>
+        <label class="radio inline">
+            <input type="radio" name="fair" value=4>
+            Excellent
+        </label>
+
+        <h4>Positive Attitude and Self-Control</h4>
+        <span class="help-bloc">
+        For example: They introduced themselves. They communicated without derogatory or aggressive language. They complimented us on our good plays. They left an overall positive impression during and after the game, e.g. during the Spirit circle
+        </span><br />
+        <label class="radio inline">
+            <input type="radio" name="positive" value=0 checked>
+            Poor
+        </label>
+        <label class="radio inline">
+            <input type="radio" name="positive" value=1>
+            Not So Good
+        </label>
+        <label class="radio inline">
+            <input type="radio" name="positive" value=2>
+            Good
+        </label>
+        <label class="radio inline">
+            <input type="radio" name="positive" value=3>
+            Very Good
+        </label>
+        <label class="radio inline">
+            <input type="radio" name="positive" value=4>
+            Excellent
+        </label>
+
+        <h4>Our Spirit compared to theirs</h4>
+        <span class="help-bloc">
+        How did our team compare to theirs with regards to rules knowledge, body contact, fair-mindedness, positive attitude and self-control?
+        </span><br />
+        <label class="radio inline">
+            <input type="radio" name="our_spirit" value=0 checked>
+            Our Spirit was much better
+        </label>
+        <label class="radio inline">
+            <input type="radio" name="our_spirit" value=1>
+            Our Spirit was slightly better
+        </label>
+        <label class="radio inline">
+            <input type="radio" name="our_spirit" value=2>
+            Our spirit was the same
+        </label>
+        <label class="radio inline">
+            <input type="radio" name="our_spirit" value=3>
+            Our spirit was slightly worse
+        </label>
+        <label class="radio inline">
+            <input type="radio" name="our_spirit" value=4>
+            Our spirit was much worse
+        </label>
+        <br />
+        <input type="submit" value="save" class="btn">
+    </form>
+{% endblock %}
