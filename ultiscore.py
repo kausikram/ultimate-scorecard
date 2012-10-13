@@ -81,7 +81,7 @@ def enter_spirit_score_for_team(mt_id):
         mt.spirit_score.our_spirit = request.form["our_spirit"]
         mt.spirit_score.save()
         mt.save()
-        return redirect("/teams/")
+        return redirect("/control/")
 
 
 if __name__ == '__main__':
