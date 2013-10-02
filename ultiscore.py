@@ -25,6 +25,11 @@ def show_control():
     return render_template("list_matches.html",matches=matches, control=True)
 
 
+@app.route('/control/mvps/')
+def show_team_mvps():
+    teams = Team.all()
+    return render_template("team_list_mvps.html", teams=teams)
+
 @app.route('/control/mvps/<int:team_id>/')
 def show_control_mvps(team_id):
     team = Team.get(Team.id == team_id)
