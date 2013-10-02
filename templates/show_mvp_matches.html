@@ -12,11 +12,11 @@
             <tr>
                 <th>Match Number</th>
                 <th>Opponent</th>
-                {% if settings.SHOULD_COLLECT_MVP_NAMES %}
-                    {% for i in range(1,settings.NUMBER_OF_MALE_MVP_NAMES+1) %}
+                {% if config.ULTISCORE_SHOULD_COLLECT_MVP_NAMES %}
+                    {% for i in range(1,config.ULTISCORE_NUMBER_OF_MALE_MVP_NAMES+1) %}
                         <th>Male MVP Choice {{ i }}</th>
                     {% endfor %}
-                    {% for i in range(1,settings.NUMBER_OF_FEMALE_MVP_NAMES+1) %}
+                    {% for i in range(1,config.ULTISCORE_NUMBER_OF_FEMALE_MVP_NAMES+1) %}
                         <th>Female MVP Choice {{ i }}</th>
                     {% endfor %}
                 {% endif %}
@@ -27,11 +27,11 @@
                 <tr>
                     <td>{{ m.id }}</td>
                     <td>{{ m.get_opponent(team).team_name }}</td>
-                    {% if settings.SHOULD_COLLECT_MVP_NAMES %}
-                        {% for i in range(1,settings.NUMBER_OF_MALE_MVP_NAMES+1) %}
+                    {% if config.ULTISCORE_SHOULD_COLLECT_MVP_NAMES %}
+                        {% for i in range(1,config.ULTISCORE_NUMBER_OF_MALE_MVP_NAMES+1) %}
                         <td>{{ m.get_mvps_for_team(team)["male"][i] }}</td>
                         {% endfor %}
-                        {% for i in range(1,settings.NUMBER_OF_FEMALE_MVP_NAMES+1) %}
+                        {% for i in range(1,config.ULTISCORE_NUMBER_OF_FEMALE_MVP_NAMES+1) %}
                         <td>{{ m.get_mvps_for_team(team)["female"][i] }}</td>
                         {% endfor %}
                     {% endif %}

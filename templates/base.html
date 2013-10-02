@@ -6,13 +6,13 @@
         <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <script src="http://code.jquery.com/jquery-latest.js"></script>
         <script src="/static/bootstrap/js/bootstrap.min.js"></script>
-        <script src="/static/bootstrap/js/bootstrap-responsive.min.css"></script>
+        <script src="/static/bootstrap/css/bootstrap-responsive.min.css"></script>
     </head>
     <body>
         <div class="row-fluid">
               <div class="navbar">
               <div class="navbar-inner">
-                  <a class="brand" href="#">Chennai Heat Live Scores</a>
+                  <a class="brand" href="#">Ultimate Scores: {{ config.ULTISCORE_TOURNAMENT_NAME }}</a>
                   <ul class="nav">
                       <li><a href="/">Match Scores</a></li>
                       <li><a href="/teams/">Spirit Scores</a></li>
@@ -24,6 +24,5 @@
                 {% endblock %}
             </div>
         </div>
-
     </body>
 </html>

@@ -1,8 +1,8 @@
 from flask import Flask, request, render_template, redirect
 from models import *
-import settings
 
 app = Flask(__name__)
+app.config.from_object('settings')
 
 @app.before_request
 def before_request():
@@ -29,7 +29,7 @@ def show_control():
 def show_control_mvps(team_id):
     team = Team.get(Team.id == team_id)
     matches = Match.list_matches_for_team(team)
-    return render_template("show_mvp_matches.html",matches=matches, settings=settings, team=team)
+    return render_template("show_mvp_matches.html",matches=matches, team=team)
 
 @app.route('/teams/')
 def list_teams():
@@ -78,7 +78,7 @@ def enter_spirit_score_for_team(match_id, team_id):
     opponent = match.get_opponent(team)
 
     if request.method == "GET":
-        return render_template("spirit_form.html", match=match, team=team, opponent=opponent, settings=settings)
+        return render_template("spirit_form.html", match=match, team=team, opponent=opponent)
 
     if request.method == "POST":
         spirit_score = SpiritScore()
@@ -89,14 +89,14 @@ def enter_spirit_score_for_team(match_id, team_id):
         spirit_score.fair = request.form["fair"]
         spirit_score.positive = request.form["positive"]
         spirit_score.our_spirit = request.form["our_spirit"]
-        if settings.SHOULD_COLLECT_MVP_NAMES:
+        if app.config["ULTISCORE_SHOULD_COLLECT_MVP_NAMES"]:
             spirit_score.mvp_male_list = ""
-            for i in range(1,settings.NUMBER_OF_MALE_MVP_NAMES+1):
+            for i in range(1,app.config["ULTISCORE_NUMBER_OF_MALE_MVP_NAMES"]+1):
                 spirit_score.mvp_male_list +="|"
                 spirit_score.mvp_male_list += request.form["mvp_male_choice_{}".format(i)]
 
             spirit_score.mvp_female_list = ""
-            for i in range(1,settings.NUMBER_OF_FEMALE_MVP_NAMES+1):
+            for i in range(1,app.config["ULTISCORE_NUMBER_OF_FEMALE_MVP_NAMES"]+1):
                 spirit_score.mvp_female_list +="|"
                 spirit_score.mvp_female_list += request.form["mvp_female_choice_{}".format(i)]
         spirit_score.save()

@@ -129,14 +129,14 @@
             Our spirit was much worse
         </label>
         <br />
-        {% if settings.SHOULD_COLLECT_MVP_NAMES %}
+        {% if config.ULTISCORE_SHOULD_COLLECT_MVP_NAMES %}
         <h3> MVPs</h3>
         <h4>Male MVPs</h4>
-        {% for i in range(1,settings.NUMBER_OF_MALE_MVP_NAMES+1) %}
+        {% for i in range(1,config.ULTISCORE_NUMBER_OF_MALE_MVP_NAMES+1) %}
         <label for="mvp_male_choice_{{ i }}">Choice {{ i }}</label><input type="text" name="mvp_male_choice_{{ i }}" />
         {% endfor %}
         <h4>Female MVPs</h4>
-        {% for i in range(1,settings.NUMBER_OF_FEMALE_MVP_NAMES+1) %}
+        {% for i in range(1,config.ULTISCORE_NUMBER_OF_FEMALE_MVP_NAMES+1) %}
         <label for="mvp_female_choice_{{ i }}">Choice {{ i }}</label><input type="text" name="mvp_female_choice_{{ i }}" />
         {% endfor %}
         <br />
