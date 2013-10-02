@@ -1,4 +1,5 @@
 import peewee
+import logging
 
 database = peewee.SqliteDatabase('data.db')
 
@@ -44,7 +45,7 @@ class Team(BaseModel):
 class Match(BaseModel):
     comments = peewee.TextField(default="")
     team_1 = peewee.ForeignKeyField(Team)
-    team_2 = peewee.ForeignKeyField(Team)
+    team_2 = peewee.ForeignKeyField(Team, related_name="opponent")
     team_1_score = peewee.IntegerField(default=0)
     team_2_score = peewee.IntegerField(default=0)
     team_1_assessed = peewee.BooleanField(default=False)
@@ -55,8 +56,22 @@ class Match(BaseModel):
         m = cls(team_1 = t1, team_2= t2, comments=comments)
         m.save()
 
+    @classmethod
+    def list_matches_for_team(cls, team):
+        return  [m for m in cls.select().where((cls.team_1==team.id) | (cls.team_2==team.id))]
+
     def get_teams(self):
         return [self.team_1, self.team_2]
+
+    def get_mvps_for_team(self,team):
+        mvps = {"male":[],"female":[]}
+        try:
+            spiritscore = SpiritScore.get(SpiritScore.team==team.id, SpiritScore.match==self.id)
+            mvps["male"] = spiritscore.mvp_male_list.split("|")
+            mvps["female"] = spiritscore.mvp_female_list.split("|")
+        except SpiritScore.DoesNotExist:
+            pass
+        return mvps
 
     def get_score_string(self):
         return "{} - {}".format(self.team_1_score, self.team_2_score)
@@ -83,3 +98,5 @@ class SpiritScore(BaseModel):
     fair = peewee.IntegerField(default=0)
     positive = peewee.IntegerField(default=0)
     our_spirit = peewee.IntegerField(default=0)
+    mvp_male_list = peewee.TextField()
+    mvp_female_list = peewee.TextField()
