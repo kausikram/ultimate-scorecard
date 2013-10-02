@@ -23,8 +23,16 @@
                     {% if control %}
                     <td><a href="/edit_score/{{ m.id }}/">Edit Score</a></td>
                     <td>
-                        <a href="/add_spirit_score/{{ m.get_matchteams()[0].id }}/">Assess {{ m.get_matchteams()[0].team.team_name}}</a>
-                        <a href="/add_spirit_score/{{ m.get_matchteams()[1].id }}/">Assess {{ m.get_matchteams()[1].team.team_name}}</a>
+                        {% if m.team_1_assessed == False %}
+                        <a href="/add_spirit_score/{{ m.id }}/team/{{ m.team_1.id }}/">Assess {{ m.team_1.team_name }}</a>
+                        {% else %}
+                        {{ m.team_1.team_name }} Ranked.
+                        {% endif %}
+                        {% if m.team_2_assessed == False %}
+                        <a href="/add_spirit_score/{{ m.id }}/team/{{ m.team_2.id }}/">Assess {{ m.team_2.team_name }}</a>
+                        {% else %}
+                        {{ m.team_2.team_name }} Ranked.
+                        {% endif %}
                     </td>
                     {% endif %}
                 </tr>

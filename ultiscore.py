@@ -16,13 +16,11 @@ def after_request(ex):
 
 @app.route('/')
 def show_scores():
-    """ list all matches here"""
     matches = Match.select().where(True)
     return render_template("list_matches.html",matches=matches, control=False)
 
 @app.route('/control/')
 def show_control():
-    """ list all matches here"""
     matches = Match.select().where(True)
     return render_template("list_matches.html",matches=matches, control=True)
 
@@ -59,28 +57,34 @@ def create_match():
 @app.route('/edit_score/<int:match_id>/', methods=['POST', 'GET'])
 def enter_score_for_match(match_id):
     match = Match.get(Match.id==match_id)
-    mts = [mt for mt in MatchTeam.filter(match__id=match_id)]
     if request.method == "GET":
-        return render_template("edit_match_score.html",mts=mts)
+        return render_template("edit_match_score.html",match=match)
     if request.method == "POST":
-        for mt in mts:
-            mt.score = request.form['{}_score'.format(mt.id)]
-            mt.save()
-        return redirect("/")
+        match.team_1_score = request.form['team_1_score']
+        match.team_2_score = request.form['team_2_score']
+        match.save()
+        return redirect("/control/")
 
-@app.route('/add_spirit_score/<int:mt_id>/', methods=['POST', 'GET'])
-def enter_spirit_score_for_team(mt_id):
-    mt = MatchTeam.get(MatchTeam.id == mt_id)
+@app.route('/add_spirit_score/<int:match_id>/team/<int:team_id>/', methods=['POST', 'GET'])
+def enter_spirit_score_for_team(match_id, team_id):
+    match = Match.get(Match.id == match_id)
+    team = Team.get(Team.id == team_id)
+    opponent = match.get_opponent(team)
+
     if request.method == "GET":
-        return render_template("spirit_form.html",mt=mt)
+        return render_template("spirit_form.html", match=match, team=team, opponent=opponent)
+
     if request.method == "POST":
-        mt.spirit_score.rules = request.form["rules"]
-        mt.spirit_score.fouls = request.form["fouls"]
-        mt.spirit_score.fair = request.form["fair"]
-        mt.spirit_score.positive = request.form["positive"]
-        mt.spirit_score.our_spirit = request.form["our_spirit"]
-        mt.spirit_score.save()
-        mt.save()
+        spirit_score = SpiritScore()
+        spirit_score.team = team
+        spirit_score.match = match
+        spirit_score.rules = request.form["rules"]
+        spirit_score.fouls = request.form["fouls"]
+        spirit_score.fair = request.form["fair"]
+        spirit_score.positive = request.form["positive"]
+        spirit_score.our_spirit = request.form["our_spirit"]
+        spirit_score.save()
+        match.set_ranking_complete(team)
         return redirect("/control/")
 
 

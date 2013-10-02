@@ -2,10 +2,10 @@
 
 {% block content %}
     <form action="." method="post">
-        {% for mt in mts %}
-        <label>Score of {{ mt.team.team_name }}</label>
-        <input type="text" name="{{ mt.id }}_score" value="{{ mt.score }}" name=>
-        {% endfor %}
+        <label>Score of {{ match.team_1.team_name }}</label>
+        <input type="text" name="team_1_score" value="{{ match.team_1_score }}" name=>
+        <label>Score of {{ match.team_2.team_name }}</label>
+        <input type="text" name="team_2_score" value="{{ match.team_2_score }}" name=>
         <br />
         <input type="submit" value="save" class="btn">
     </form>

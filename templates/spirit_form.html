@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="alert"> This form is to assess the performance of <strong>{{mt.team.team_name}}</strong> and should be filled by <strong>{{ mt.get_opponent().team_name }}</strong></div>
+<div class="alert"> This form is to assess the performance of <strong>{{ team.team_name }}</strong> and should be filled by <strong>{{ opponent.team_name }}</strong></div>
     <form action="." method="post">
 
         <h4>Rules Knowledge and Use</h4>

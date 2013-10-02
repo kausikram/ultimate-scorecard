@@ -16,7 +16,6 @@ def main():
     Team.create_table()
     Match.create_table()
     SpiritScore.create_table()
-    MatchTeam.create_table()
 
 if __name__ == '__main__':
     main()
